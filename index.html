@@ -80,7 +80,7 @@
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
             .attr("d", d3.line()
-                .x(function(d) { console.log(d);return dateScale(d.date) })
+                .x(function(d) { return dateScale(d3.timeParse("%m-%d-%YT%H:%M")(d.date)) })
                 .y(function(d) { return yieldScale(d.lactation_yield) })
                 )
     })

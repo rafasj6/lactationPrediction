@@ -52,7 +52,7 @@
 
     d3.csv("lactation.csv").then( (data) => {
 
-
+        data = data.filter(function(d){return d.date != ""})
 
         const dateExtent = d3.extent(data, d => {return d3.timeParse("%Y-%m-%dT%H:%M")(d.date)});
         const dateScale = d3.scaleTime().domain(dateExtent).range([margin,width]);

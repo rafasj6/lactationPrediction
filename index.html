@@ -9,7 +9,7 @@
 <script>
     const svgWidth = 600;
     const svgHeight = 500;
-    const padding = 25;
+    const padding = 50;
     const width = svgWidth -(padding*2)
     const height = svgHeight -(padding*2)
 
@@ -36,7 +36,7 @@
             .call(leftGridlines);
 
         // X axis (from class notes)
-        let bottomAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b '%y")); //help of https://bl.ocks.org/mbostock/5537697
+        let bottomAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m-%d-%YT%H:%M")); //help of https://bl.ocks.org/mbostock/5537697
         let bottomGridlines = d3.axisBottom(xScale)
                                 .tickSize(-height)
                                 .tickFormat("")

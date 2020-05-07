@@ -52,8 +52,9 @@
 
 
     d3.csv("lactation.csv").then( (rawData) => {
-
-        console.log(rawData);
+        const dateExtent = d3.extent(data, d => {return d['date']});
+        const dateScale = d3.scaleTime().domain(dateExtent).range([margin+padding,svgWidth]);
+        console.log(dateExtent);
     })
 
    

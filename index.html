@@ -40,7 +40,7 @@
                                             .tickFormat("")
                     annotations.append("g")
                         .attr("class", "x axis")
-                        .attr("transform","translate("+0+","+(svgHeight- margin)+")")
+                        .attr("transform","translate("+0+","+(height- margin)+")")
                         .call(bottomAxis);
     }
 
@@ -55,10 +55,10 @@
 
 
         const dateExtent = d3.extent(data, d => {return d3.timeParse("%Y-%m-%dT%H:%M")(d.date)});
-        const dateScale = d3.scaleTime().domain(dateExtent).range([margin,svgWidth]);
+        const dateScale = d3.scaleTime().domain(dateExtent).range([margin,width]);
 
         const yieldExtent = d3.extent(data, d => {return d['lactation_yield']});
-        const yieldScale = d3.scaleLinear().domain(yieldExtent).range([svgHeight-margin, padding]);
+        const yieldScale = d3.scaleLinear().domain(yieldExtent).range([height-margin, padding]);
 
 
         createAxesAndGrids(dateScale, yieldScale);

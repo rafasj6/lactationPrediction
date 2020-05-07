@@ -33,7 +33,7 @@
                         .call(leftAxis)
                    
                     // X axis (from class notes)
-                    let bottomAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b '%y")); //help of https://bl.ocks.org/mbostock/5537697 and https://github.com/d3/d3-axis?fbclid=IwAR2cPd2lekPYog1_VAU1YWDBgWGSaL_J2TotRmZPi77kKZR9Rx1nQD3O4gE
+                    let bottomAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b '%d")); //help of https://bl.ocks.org/mbostock/5537697 and https://github.com/d3/d3-axis?fbclid=IwAR2cPd2lekPYog1_VAU1YWDBgWGSaL_J2TotRmZPi77kKZR9Rx1nQD3O4gE
                     let bottomGridlines = d3.axisBottom(xScale)
                                             .ticks(20)
                                             .tickSize(0)
@@ -78,15 +78,15 @@
 
         svg.append("text")             
             .attr("transform",
-                    "translate(" + (svgWidth/2) + " ," + 
-                                (svgHeight + margin + 20) + ")")
+                    "translate(" + (width/2) + " ," + 
+                                (height + margin + 10) + ")")
             .style("text-anchor", "middle")
             .text("Date");
 
         svg.append("text")
             .attr("transform", "rotate(-90)")
             .attr("y", 0 - margin)
-            .attr("x",0 - (svgHeight / 2))
+            .attr("x",0 - (height / 2))
             .attr("dy", "1em")
             .style("text-anchor", "middle")
             .text("Milk Yield");

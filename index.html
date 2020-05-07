@@ -54,7 +54,23 @@
     d3.csv("lactation.csv").then( (data) => {
         const dateExtent = d3.extent(data, d => {return d['date']});
         const dateScale = d3.scaleTime().domain(dateExtent).range([padding,svgWidth]);
-        console.log(dateExtent);
+
+        const yieldExtent = d3.extent(data, d => {return d['lactation_yield']});
+        const yieldScale = d3.scaleLinear().domain(yieldExtent).range([chartHeight-padding, padding]);
+
+
+        createAxesAndGrids(dateScale, yieldScale);
+
+        // Add the line
+        svg.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .x(function(d) { return dateScale(d.date) })
+                .y(function(d) { return yieldScale(d.lactation_yield) })
+                )
     })
 
    

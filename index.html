@@ -65,7 +65,7 @@
         const dateExtent = d3.extent(data, d => {return d3.timeParse("%Y-%m-%dT%H:%M")(d.date)});
         const dateScale = d3.scaleTime().domain(dateExtent).range([padding,svgWidth]);
 
-        const yieldExtent = d3.extent(data, d => {return d['lactation_yield']});
+        const yieldExtent = d3.extent(data, d => {return d[' lactation_yield']});
         const yieldScale = d3.scaleLinear().domain(yieldExtent).range([svgHeight-padding, padding]);
 
 
@@ -81,7 +81,7 @@
             .attr("stroke-width", 1.5)
             .attr("d", d3.line()
                 .x(function(d) { return dateScale(d3.timeParse("%Y-%m-%dT%H:%M")(d.date)) })
-                .y(function(d) { console.log(d);return yieldScale(d["lactation_yield"])})
+                .y(function(d) { console.log(d);return yieldScale(d[" lactation_yield"])})
                 )
     })
 

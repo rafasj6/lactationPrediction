@@ -36,7 +36,7 @@
             .call(leftGridlines);
 
         // X axis (from class notes)
-        let bottomAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m-%d\n%H:%M")); //help of https://bl.ocks.org/mbostock/5537697
+        let bottomAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%m-%d")); //help of https://bl.ocks.org/mbostock/5537697
         let bottomGridlines = d3.axisBottom(xScale)
                                 .tickSize(-height)
                                 .tickFormat("")

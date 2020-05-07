@@ -62,7 +62,7 @@
 
 
 
-        const dateExtent = d3.extent(data, d => {return d['date']});
+        const dateExtent = d3.extent(data, d => {return d3.time.format("%Y-%m-%d %X").parse(d['date'])});
         const dateScale = d3.scaleTime().domain(dateExtent).range([padding,svgWidth]);
 
         const yieldExtent = d3.extent(data, d => {return d['lactation_yield']});

@@ -4,6 +4,7 @@
 
 </head>
 
+<p id = "p1"></p>
 
 <script>
     const svgWidth = 600;
@@ -13,6 +14,7 @@
     const height = svgHeight -(padding*2)
 
     const fontSize =10;
+
 
 
     function createAxesAndGrids(xScale, yScale){
@@ -34,7 +36,7 @@
             .call(leftGridlines);
 
         // X axis (from class notes)
-        let bottomAxis = d3.axisBottom(xScale).ticks(10,d3.format("$.0s")); //help of https://bl.ocks.org/mbostock/5537697
+        let bottomAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b '%y")); //help of https://bl.ocks.org/mbostock/5537697
         let bottomGridlines = d3.axisBottom(xScale)
                                 .tickSize(-height)
                                 .tickFormat("")
@@ -51,12 +53,20 @@
     }
 
 
+    svg = d3.select("#p1")
+                .append("svg")
+                .attr("width", svgWidth)
+                .attr("height", svgHeight);
+
     d3.csv("lactation.csv").then( (data) => {
+
+
+
         const dateExtent = d3.extent(data, d => {return d['date']});
         const dateScale = d3.scaleTime().domain(dateExtent).range([padding,svgWidth]);
 
         const yieldExtent = d3.extent(data, d => {return d['lactation_yield']});
-        const yieldScale = d3.scaleLinear().domain(yieldExtent).range([chartHeight-padding, padding]);
+        const yieldScale = d3.scaleLinear().domain(yieldExtent).range([svgHeight-padding, padding]);
 
 
         createAxesAndGrids(dateScale, yieldScale);

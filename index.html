@@ -12,7 +12,7 @@
     const padding = 25;
     const width = svgWidth -(padding*2)
     const height = svgHeight -(padding*2)
-    margin =50
+    margin = 25
 
     const fontSize =10;
 
@@ -29,7 +29,7 @@
                         .tickFormat("")
                     annotations.append("g")
                         .attr("class", "y axis")
-                        .attr("transform","translate("+(margin-2)+","+margin+")")
+                        .attr("transform","translate("+(margin-2)+","+0+")")
                         .call(leftAxis)
                    
                     // X axis (from class notes)

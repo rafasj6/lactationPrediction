@@ -75,6 +75,21 @@
                 .x(function(d) { return dateScale(d3.timeParse("%Y-%m-%dT%H:%M")(d.date)) })
                 .y(function(d) { console.log(d);return yieldScale(d['lactation_yield'])})
                 )
+
+        svg.append("text")             
+            .attr("transform",
+                    "translate(" + (svgWidth/2) + " ," + 
+                                (svgHeight + margin + 20) + ")")
+            .style("text-anchor", "middle")
+            .text("Date");
+
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - margin)
+            .attr("x",0 - (svgHeight / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Milk Yield");
     })
 
    

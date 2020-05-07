@@ -58,7 +58,7 @@
         const dateScale = d3.scaleTime().domain(dateExtent).range([margin,svgWidth]);
 
         const yieldExtent = d3.extent(data, d => {return d['lactation_yield']});
-        const yieldScale = d3.scaleLinear().domain(yieldExtent).range([svgHeight-padding, padding]);
+        const yieldScale = d3.scaleLinear().domain(yieldExtent).range([svgHeight-margin, padding]);
 
 
         createAxesAndGrids(dateScale, yieldScale);

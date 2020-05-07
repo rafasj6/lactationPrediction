@@ -71,6 +71,8 @@
 
         createAxesAndGrids(dateScale, yieldScale);
 
+        console.log(dateScale)
+
         // Add the line
         svg.append("path")
             .datum(data)
@@ -78,7 +80,7 @@
             .attr("stroke", "steelblue")
             .attr("stroke-width", 1.5)
             .attr("d", d3.line()
-                .x(function(d) {console.log(d); return dateScale(d.date) })
+                .x(function(d) { return dateScale(d.date) })
                 .y(function(d) { return yieldScale(d.lactation_yield) })
                 )
     })

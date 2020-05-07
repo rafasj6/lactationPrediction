@@ -81,7 +81,7 @@
             .attr("stroke-width", 1.5)
             .attr("d", d3.line()
                 .x(0)//function(d) { console.log(d3.timeParse("%Y-%m-%dT%H:%M")(d.date));return dateScale(d3.timeParse("%Y-%m-%dT%H:%M")(d.date)) })
-                .y(function(d) { return yieldScale(d.lactation_yield)})
+                .y(1)//function(d) { return yieldScale(d.lactation_yield)})
                 )
     })
 

@@ -1,1 +1,99 @@
-<html>
+<html><head>
+    <title>Lactation Prediction</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+</head>
+
+<p id = "p1"></p>
+
+<script>
+    const svgWidth = 600;
+    const svgHeight = 500;
+    const padding = 25;
+    const width = svgWidth -(padding*2)
+    const height = svgHeight -(padding*2)
+    margin = 80
+
+    const fontSize =10;
+
+
+
+    function createAxesAndGrids(xScale, yScale){
+
+        let annotations = svg.append("g").attr("id","annotations");
+
+                    //Y axis (from class notes)
+                    let leftAxis = d3.axisLeft(yScale);
+                    let leftGridlines = d3.axisLeft(yScale)
+                        .tickSize(5)
+                        .tickFormat("")
+                    annotations.append("g")
+                        .attr("class", "y axis")
+                        .attr("transform","translate("+(margin)+","+0+")")
+                        .call(leftAxis)
+                   
+                    // X axis (from class notes)
+                    let bottomAxis = d3.axisBottom(xScale).tickFormat(d3.timeFormat("%b '%d")); //help of https://bl.ocks.org/mbostock/5537697 and https://github.com/d3/d3-axis?fbclid=IwAR2cPd2lekPYog1_VAU1YWDBgWGSaL_J2TotRmZPi77kKZR9Rx1nQD3O4gE
+                    let bottomGridlines = d3.axisBottom(xScale)
+                                            .ticks(20)
+                                            .tickSize(0)
+                                            .tickFormat("")
+                    annotations.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform","translate("+0+","+(height- margin)+")")
+                        .call(bottomAxis);
+    }
+
+
+    svg = d3.select("#p1")
+                .append("svg")
+                .attr("width", svgWidth)
+                .attr("height", svgHeight);
+
+    d3.csv("lactation.csv").then( (data) => {
+
+        data = data.filter(function(d){return d.date != ""})
+
+        const dateExtent = d3.extent(data, d => {return d3.timeParse("%Y-%m-%dT%H:%M")(d.date)});
+        const dateScale = d3.scaleTime().domain(dateExtent).range([margin,width]);
+
+        const yieldExtent = d3.extent(data, d => {return d['lactation_yield']});
+        const yieldScale = d3.scaleLinear().domain(yieldExtent).range([height-margin, padding]);
+
+
+        createAxesAndGrids(dateScale, yieldScale);
+
+        console.log(yieldExtent)
+
+        // Add the line
+        svg.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "steelblue")
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .x(function(d) { return dateScale(d3.timeParse("%Y-%m-%dT%H:%M")(d.date)) })
+                .y(function(d) { console.log(d);return yieldScale(d['lactation_yield'])})
+                )
+
+        svg.append("text")             
+            .attr("transform",
+                    "translate(" + (width/2 +margin) + " ," + 
+                                (height + 10) + ")")
+            .style("text-anchor", "middle")
+            .text("Date");
+
+        svg.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0)
+            .attr("x",0 - (height / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .text("Milk Yield");
+    })
+
+   
+   
+
+                                        
+</script>

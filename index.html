@@ -1,1 +1,63 @@
-<html>
+<html><head>
+    <title>Lactation Prediction</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+</head>
+
+
+<script>
+    const svgWidth = 600;
+    const svgHeight = 500;
+    const padding = 25;
+    const width = svgWidth -(padding*2)
+    const height = svgHeight -(padding*2)
+
+    const fontSize =10;
+
+
+    function createAxesAndGrids(xScale, yScale){
+        let annotations = svg.append("g").attr("id","annotations");
+
+        //Y axis (from class notes)
+        let leftAxis = d3.axisLeft(yScale).tickSize(0);
+        let leftGridlines = d3.axisLeft(yScale)
+            .tickSize(-width)
+            .tickFormat("")
+        annotations.append("g")
+            .attr("class", "y axis")
+            .attr("transform","translate("+(padding)+","+0+")")
+            .call(leftAxis)
+        annotations.append("g")
+            .attr("class", "y gridlines")
+            .style("stroke", "lightgrey")
+            .attr("transform","translate("+(padding)+","+0+")")
+            .call(leftGridlines);
+
+        // X axis (from class notes)
+        let bottomAxis = d3.axisBottom(xScale).ticks(10,d3.format("$.0s")); //help of https://bl.ocks.org/mbostock/5537697
+        let bottomGridlines = d3.axisBottom(xScale)
+                                .tickSize(-height)
+                                .tickFormat("")
+        annotations.append("g")
+            .attr("class", "x axis")
+            .attr("transform","translate("+0+","+(height+padding)+")")
+            .call(bottomAxis);
+        annotations.append("g")
+            .attr("class", "x gridlines")
+            .style("stroke", "lightgrey")
+
+            .attr("transform","translate("+0+","+(height+padding)+")")
+            .call(bottomGridlines);
+    }
+
+
+    d3.json("lactation.json").then( (rawData) => {
+
+        console.log(rawData);
+    })
+
+   
+   
+
+                                        
+</script>
